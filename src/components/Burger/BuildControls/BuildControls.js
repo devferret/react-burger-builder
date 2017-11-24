@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './BuildControls.css';
 import BuildControl from './BuildControl/BuildControl';
@@ -12,6 +13,10 @@ const controls = [
 
 const buildControls = props => (
   <div className={classes.BuildControls}>
+    <p>
+      Total Price :
+      <strong> ${props.totalPrice.toFixed(2)}</strong>
+    </p>
     {
       controls.map(ctrl => (
         <BuildControl
@@ -23,5 +28,9 @@ const buildControls = props => (
     }
   </div>
 );
+
+buildControls.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
+};
 
 export default buildControls;
