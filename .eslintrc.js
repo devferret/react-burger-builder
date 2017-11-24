@@ -6,9 +6,12 @@ module.exports = {
     'no-console': 0,
     'no-param-reassign': 0,
     'react/prefer-stateless-function': 1,
+    'react/no-array-index-key': 0,
+    'react/forbid-prop-types': 0,
   },
   env: {
     browser: true,
     node: true,
   },
+  'parser': 'babel-eslint',
 };
