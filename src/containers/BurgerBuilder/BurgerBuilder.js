@@ -32,7 +32,6 @@ class BurgerBuilder extends Component {
   }
 
   updateIngredient = (type, value) => {
-    // Update ingredient count
     const oldCount = this.state.ingredients[type];
     const newCount = oldCount + value;
     if (newCount < 0) return;
@@ -41,20 +40,28 @@ class BurgerBuilder extends Component {
     };
     newIngredients[type] = newCount;
 
-    // Update total price
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice + (value * INGREDIENTS_PRICE[type]);
-
-    // Update purchasable
-    const totalIngredients = Object.keys(newIngredients)
-      .map(key => newIngredients[key])
-      .reduce((accumulator, currentValue) => accumulator + currentValue);
+    const newTotalPrice = this.updateTotalPrice(type, value);
+    const newPurchasable = this.updatePurchasable(newIngredients);
 
     this.setState({
       ingredients: newIngredients,
-      totalPrice: newPrice,
-      purchasable: totalIngredients > 0,
+      totalPrice: newTotalPrice,
+      purchasable: newPurchasable,
     });
+  }
+
+  updateTotalPrice = (type, value) => {
+    const oldPrice = this.state.totalPrice;
+    const newPrice = oldPrice + (value * INGREDIENTS_PRICE[type]);
+    return newPrice;
+  }
+
+  updatePurchasable = (newIngredients) => {
+    const totalIngredients = Object.keys(newIngredients)
+      .map(key => newIngredients[key])
+      .reduce((accumulator, currentValue) => accumulator + currentValue);
+    const newPurchasable = totalIngredients > 0;
+    return newPurchasable;
   }
 
   render() {
