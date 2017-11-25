@@ -18,19 +18,26 @@ const buildControls = props => (
       <strong> ${props.totalPrice.toFixed(2)}</strong>
     </p>
     {
-      controls.map(ctrl => (
-        <BuildControl
+      controls.map(ctrl =>
+        (<BuildControl
           key={ctrl.type}
           label={ctrl.label}
           addIngredient={() => props.addIngredient(ctrl.type)}
           removeIngredient={() => props.removeIngredient(ctrl.type)}
         />))
     }
+    <button
+      className={classes.OrderButton}
+      disabled={!props.purchasable}
+    >
+      Order Now
+    </button>
   </div>
 );
 
 buildControls.propTypes = {
   totalPrice: PropTypes.number.isRequired,
+  purchasable: PropTypes.bool.isRequired,
 };
 
 export default buildControls;
