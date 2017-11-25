@@ -19,6 +19,7 @@ const orderSummary = (props) => {
       <ul>
         {ingredientSummary}
       </ul>
+      <h4>Total price: ${props.totalPrice.toFixed(2)}</h4>
       <p>Continue to checkout ?</p>
       <Button
         btnType="Danger"
@@ -34,6 +35,7 @@ const orderSummary = (props) => {
 orderSummary.propTypes = {
   ingredients: PropTypes.object,
   purchasingToggle: PropTypes.func.isRequired,
+  totalPrice: PropTypes.number.isRequired,
 };
 
 orderSummary.defaultProps = {
