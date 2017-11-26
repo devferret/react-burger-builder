@@ -1,19 +1,16 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Aux from '../../hoc/Aux';
 import classes from './Layout.css';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
 
-class Layout extends PureComponent {
-  render() {
-    return (
-      <Aux>
-        <div>Toolbar , SideDrawer, Backdrop</div>
-        <main className={classes.Content}>{this.props.children}</main>
-      </Aux>
-    );
-  }
-}
+const Layout = props => (
+  <Aux>
+    <Toolbar />
+    <main className={classes.Content}>{props.children}</main>
+  </Aux>
+);
 
 Layout.propTypes = {
   children: PropTypes.element.isRequired,
