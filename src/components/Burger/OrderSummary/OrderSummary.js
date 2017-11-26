@@ -27,7 +27,12 @@ const orderSummary = (props) => {
       >
         Cancel
       </Button>
-      <Button btnType="Success">Continue</Button>
+      <Button
+        btnType="Success"
+        clicked={() => {}}
+      >
+        Continue
+      </Button>
     </Aux>
   );
 };
