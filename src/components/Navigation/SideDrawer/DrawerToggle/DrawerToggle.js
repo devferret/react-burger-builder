@@ -7,8 +7,6 @@ const drawerToggle = props => (
   <div
     className={classes.DrawerToggle}
     onClick={props.toggle}
-    onKeyUp={() => {}}
-    role="presentation"
   >
     <div />
     <div />

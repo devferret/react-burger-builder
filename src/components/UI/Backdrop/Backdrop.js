@@ -8,8 +8,6 @@ const backdrop = props => (
     <div
       className={classes.Backdrop}
       onClick={props.toggle}
-      onKeyUp={() => {}}
-      role="presentation"
     />
     : null
 );
