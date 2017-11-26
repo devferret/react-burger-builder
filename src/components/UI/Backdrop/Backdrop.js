@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import classes from './Backdrop.css';
 
 const backdrop = props => (
-  <div
-    className={classes.Backdrop}
-    onClick={props.purchasingToggle}
-    onKeyUp={() => {}}
-    role="presentation"
-  />
+  props.show ?
+    <div
+      className={classes.Backdrop}
+      onClick={props.toggle}
+      onKeyUp={() => {}}
+      role="presentation"
+    />
+    : null
 );
 
 backdrop.propTypes = {
-  purchasingToggle: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default backdrop;
