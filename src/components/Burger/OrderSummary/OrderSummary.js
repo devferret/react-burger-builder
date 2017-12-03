@@ -29,7 +29,7 @@ const orderSummary = (props) => {
       </Button>
       <Button
         btnType="Success"
-        clicked={() => {}}
+        clicked={props.purchasingCheckout}
       >
         Continue
       </Button>
@@ -40,6 +40,7 @@ const orderSummary = (props) => {
 orderSummary.propTypes = {
   ingredients: PropTypes.object,
   purchasingToggle: PropTypes.func.isRequired,
+  purchasingCheckout: PropTypes.func.isRequired,
   totalPrice: PropTypes.number.isRequired,
 };
 

@@ -5,6 +5,9 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios.config';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENTS_PRICE = {
   salad: 0.1,
@@ -24,6 +27,7 @@ class BurgerBuilder extends Component {
     totalPrice: 0.2,
     purchasable: false,
     purchasing: false,
+    loading: false,
   }
 
   addIngredient = (type) => {
@@ -71,18 +75,40 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: !this.state.purchasing });
   }
 
+  purchasingCheckout = async () => {
+    this.setState({ loading: true });
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'testName testSurname',
+        address: 'testAddress',
+        email: 'test@test.com',
+      },
+    };
+    await axios.post('/orders.json', order);
+    this.setState({
+      purchasing: false,
+      loading: false,
+    });
+  }
+
   render() {
+    const orderSummary = this.state.loading ? <Spinner /> :
+      (<OrderSummary
+        ingredients={this.state.ingredients}
+        purchasingToggle={this.purchasingToggle}
+        purchasingCheckout={this.purchasingCheckout}
+        totalPrice={this.state.totalPrice}
+      />);
+
     return (
       <Aux>
         <Modal
           show={this.state.purchasing}
-          purchasingToggle={this.purchasingToggle}
+          toggle={this.purchasingToggle}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            purchasingToggle={this.purchasingToggle}
-            totalPrice={this.state.totalPrice}
-          />
+          { orderSummary }
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
@@ -97,4 +123,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);

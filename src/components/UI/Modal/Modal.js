@@ -7,7 +7,8 @@ import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.show !== this.props.show;
+    return nextProps.show !== this.props.show ||
+      nextProps !== this.props;
   }
 
   render() {
@@ -15,7 +16,7 @@ class Modal extends Component {
       <Aux>
         <Backdrop
           show={this.props.show}
-          toggle={this.props.purchasingToggle}
+          toggle={this.props.toggle}
         />
         <div
           className={classes.Modal}
@@ -34,7 +35,7 @@ class Modal extends Component {
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
   show: PropTypes.bool.isRequired,
-  purchasingToggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default Modal;
